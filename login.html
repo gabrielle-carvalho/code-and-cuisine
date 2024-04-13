@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styleindex.css">
+    <title>Code&Cuisine</title>
+</head>
+<body>
+    <div class="box">
+        <div class="img-box">
+            <img src="./img/Black_and_White_Illustration_Food_Logo-removebg-preview.png">
+        </div>
+        <div class="form-box">
+            <h2>Criar Conta</h2>
+            <p> Novo por aqui? <a href="./indexx.html"> Cadastre-se </a> </p>
+            <form id="cadastroForm">
+                <div class="input-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" placeholder="Digite o seu email" required>
+                    <div class="error-box" id="email-error"></div>
+                </div>
+
+                <div class="input-group w50">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" placeholder="Digite sua senha" required>
+                    <div class="error-box" id="senha-error"></div>
+                </div>
+
+                <div class="input-group">
+                    <button id="cadastroButton">Login</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="loader-container">
+        <div class="loader"></div>
+        <h2>Carregando...</h2>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const content = document.querySelector(".box");
+            const loaderContainer = document.querySelector(".loader-container");
+            const cadastroForm = document.querySelector("#cadastroForm");
+
+            loaderContainer.style.display = "none"; // Inicialmente, ocultar tela de carregamento
+
+            cadastroForm.addEventListener("submit", function (event) {
+                event.preventDefault(); // Impedir o envio do formulário padrão
+
+                const email = document.getElementById("email").value.trim();
+                const senha = document.getElementById("senha").value.trim();
+
+                const emailError = document.getElementById("email-error");
+                const senhaError = document.getElementById("senha-error");
+
+                // Limpar mensagens de erro anteriores
+                emailError.textContent = "";
+                senhaError.textContent = "";
+
+                if (email === "") {
+                    emailError.textContent = "O campo E-mail é obrigatório.";
+                    return;
+                } else if (!email.includes("@")) {
+                    emailError.textContent = "O campo E-mail deve ser um endereço de e-mail válido.";
+                    return;
+                }
+
+                if (senha.length < 6) {
+                    senhaError.textContent = "A senha deve ter no mínimo 6 caracteres.";
+                    return;
+                }
+
+                content.style.display = "none"; // Ocultar todo o conteúdo
+                loaderContainer.style.display = "block"; // Exibir tela de carregamento
+
+                setTimeout(function () {
+                    // Simulando redirecionamento após o carregamento bem-sucedido
+                    window.location.href = "./homee.html";
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
